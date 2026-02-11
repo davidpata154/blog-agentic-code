@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { Post, PostMetadata, PostPreview } from '@/types/post'
+import { BlogPost, PostMetadata, PostPreview } from '@/types/post'
 import { markdownToHtml } from './markdown'
 
 // Directorio donde se encuentran los posts
@@ -43,7 +43,7 @@ export function getAllPostSlugs(): string[] {
  * procesa el contenido a HTML y retorna el post completo.
  *
  * @param slug - Identificador único del post
- * @returns Promise que resuelve con el Post completo, o null si no existe
+ * @returns Promise que resuelve con el BlogPost completo, o null si no existe
  *
  * @example
  * ```ts
@@ -53,7 +53,7 @@ export function getAllPostSlugs(): string[] {
  * }
  * ```
  */
-export async function getPostBySlug(slug: string): Promise<Post | null> {
+export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
     const fullPath = path.join(POSTS_DIRECTORY, `${slug}.md`)
 
