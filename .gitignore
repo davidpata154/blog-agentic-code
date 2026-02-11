@@ -35,3 +35,58 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ADW (Agentic Development Workflow) Configuration
+.ports.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+*.egg-info/
+.pytest_cache/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ADW Worktrees (git worktrees for isolated workflows)
+trees/
+!trees/README.md
+
+# Claude hooks logs
+logs/
+
+# Agent output directories (ADW execution results)
+agents/
+
+# Claude output files
+claude-max-output.json
+claude-max-output.jsonl
+
+# ADW storage
+storage.json
+deep_specs/
+
+# Playwright screenshots and videos
+screenshots/
+videos/
+
+# MCP configuration (local only)
+.mcp.json
+
+# Settings local (personal overrides)
+.claude/settings.local.json

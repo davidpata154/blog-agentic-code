@@ -1,0 +1,21 @@
+{
+  "browser": {
+    "browserName": "chromium",
+    "launchOptions": {
+      "headless": true
+    },
+    "contextOptions": {
+      "recordVideo": {
+        "dir": "/Users/david.zuluaga/Documents/Agentic code/TAC-7/tac-7/tac-7/trees/d31168e4/videos",
+        "size": {
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      }
+    }
+  }
+}
