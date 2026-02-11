@@ -1,0 +1,15 @@
+# Archivos generados
+.next
+out
+node_modules
+dist
+build
+
+# Archivos de configuración
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Otros
+.git
+.DS_Store
