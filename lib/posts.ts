@@ -8,6 +8,49 @@ import { markdownToHtml } from './markdown'
 const POSTS_DIRECTORY = path.join(process.cwd(), 'content/posts')
 
 /**
+ * Calcula el tiempo estimado de lectura en minutos
+ *
+ * Calcula el tiempo de lectura basándose en el conteo de palabras
+ * del contenido Markdown. Usa un promedio de 200 palabras por minuto,
+ * que es estándar para contenido técnico.
+ *
+ * @param content - Contenido en formato Markdown
+ * @returns Tiempo estimado de lectura en minutos (mínimo 1)
+ *
+ * @example
+ * ```ts
+ * calculateReadingTime('Este es un post con 100 palabras...') // 1
+ * calculateReadingTime('Este es un post con 500 palabras...') // 3
+ * ```
+ */
+export function calculateReadingTime(content: string): number {
+  // Cuenta las palabras dividiendo por espacios en blanco
+  const wordCount = content.trim().split(/\s+/).filter((word) => word.length > 0).length
+
+  // Calcula minutos usando 200 palabras/minuto y redondea hacia arriba
+  const minutes = Math.ceil(wordCount / 200)
+
+  // Retorna mínimo 1 minuto para contenido muy corto
+  return Math.max(1, minutes)
+}
+
+/**
+ * Formatea el tiempo de lectura en español
+ *
+ * @param minutes - Tiempo de lectura en minutos
+ * @returns String formateado (ej: "1 min de lectura" o "5 mins de lectura")
+ *
+ * @example
+ * ```ts
+ * formatReadingTime(1)  // "1 min de lectura"
+ * formatReadingTime(5)  // "5 mins de lectura"
+ * ```
+ */
+export function formatReadingTime(minutes: number): string {
+  return minutes === 1 ? '1 min de lectura' : `${minutes} mins de lectura`
+}
+
+/**
  * Obtiene todos los slugs de posts disponibles
  *
  * Lee el directorio de posts y retorna un array con los nombres
@@ -76,6 +119,9 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       return null
     }
 
+    // Calcula el tiempo de lectura antes de convertir a HTML
+    const readingTime = calculateReadingTime(content)
+
     // Convierte el Markdown a HTML
     const htmlContent = await markdownToHtml(content)
 
@@ -93,6 +139,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       description: metadata.description,
       date: dateString,
       content: htmlContent,
+      readingTime,
     }
   } catch (error) {
     console.error(`Error reading post ${slug}:`, error)
@@ -125,9 +172,12 @@ export async function getAllPosts(): Promise<PostPreview[]> {
       try {
         const fullPath = path.join(POSTS_DIRECTORY, `${slug}.md`)
         const fileContents = fs.readFileSync(fullPath, 'utf8')
-        const { data } = matter(fileContents)
+        const { data, content } = matter(fileContents)
 
         const metadata = data as PostMetadata
+
+        // Calcula el tiempo de lectura
+        const readingTime = calculateReadingTime(content)
 
         // Normaliza la fecha a formato ISO string
         const dateString =
@@ -140,6 +190,7 @@ export async function getAllPosts(): Promise<PostPreview[]> {
           title: metadata.title,
           description: metadata.description,
           date: dateString,
+          readingTime,
         }
       } catch (error) {
         console.error(`Error reading post ${slug}:`, error)

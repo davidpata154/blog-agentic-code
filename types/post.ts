@@ -35,6 +35,7 @@ export interface BlogPost {
   description: string
   date: string
   content: string
+  readingTime: number
 }
 
 /**
@@ -47,4 +48,5 @@ export interface PostPreview {
   title: string
   description: string
   date: string
+  readingTime: number
 }
