@@ -67,3 +67,11 @@ This prompt helps you determine what documentation you should read based on the 
     - When working with light green background styling
     - When implementing background color changes to green variants
     - When referencing the current background color implementation
+
+- app_docs/feature-174525b3-post-search.md
+  - Conditions:
+    - When working with post search functionality
+    - When implementing search or filtering features for blog posts
+    - When working with the SearchBar component or usePostSearch hook
+    - When troubleshooting real-time filtering or search UI
+    - When adding similar search features to other content types
