@@ -84,3 +84,12 @@ This prompt helps you determine what documentation you should read based on the 
     - When working with the PostCard component or post display formatting
     - When troubleshooting reading time display or formatting
     - When adding similar time estimate features to other content types
+
+- app_docs/feature-e6b95432-textarea-character-limit.md
+  - Conditions:
+    - When working with character limits on textareas or input fields
+    - When implementing real-time character counters or validation
+    - When working with the PostForm component
+    - When adding visual feedback for input length constraints
+    - When troubleshooting form validation or character counting
+    - When adding similar character limit features to other form fields

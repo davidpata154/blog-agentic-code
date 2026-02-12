@@ -10,6 +10,8 @@ interface PostFormProps {
   buttonText?: string
 }
 
+const MAX_CHARACTERS = 250
+
 /**
  * Formulario simple para crear/editar posts
  */
@@ -72,9 +74,24 @@ export default function PostForm({
           onChange={(e) => setContent(e.target.value)}
           placeholder="Escribe el contenido..."
           rows={8}
+          maxLength={MAX_CHARACTERS}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 resize-none"
           required
+          aria-describedby="character-counter"
         />
+        <div
+          id="character-counter"
+          className={`text-sm text-right mt-1 ${
+            content.length >= MAX_CHARACTERS
+              ? 'text-red-600 font-semibold'
+              : content.length >= 230
+                ? 'text-yellow-600 font-medium'
+                : 'text-gray-600'
+          }`}
+          aria-live="polite"
+        >
+          {content.length}/{MAX_CHARACTERS}
+        </div>
       </div>
 
       <div className="flex gap-3">
