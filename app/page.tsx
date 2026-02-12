@@ -2,8 +2,10 @@
 
 import { useState } from 'react'
 import { usePosts } from '@/hooks/usePosts'
+import { usePostSearch } from '@/hooks/usePostSearch'
 import PostForm from '@/components/PostForm'
 import PostItem from '@/components/PostItem'
+import SearchBar from '@/components/SearchBar'
 import { Post } from '@/types/post'
 
 /**
@@ -14,6 +16,10 @@ export default function HomePage() {
   const { posts, isLoading, createPost, updatePost, deletePost } = usePosts()
   const [editingPost, setEditingPost] = useState<Post | null>(null)
   const [showForm, setShowForm] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
+
+  // Filtrar posts según el término de búsqueda
+  const filteredPosts = usePostSearch(posts, searchTerm)
 
   const handleCreate = (title: string, content: string) => {
     createPost(title, content)
@@ -58,6 +64,15 @@ export default function HomePage() {
         </div>
       )}
 
+      {/* Barra de búsqueda */}
+      {!showForm && !editingPost && posts.length > 0 && (
+        <SearchBar
+          value={searchTerm}
+          onChange={setSearchTerm}
+          resultCount={filteredPosts.length}
+        />
+      )}
+
       {/* Formulario para nuevo post */}
       {showForm && !editingPost && (
         <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
@@ -95,18 +110,27 @@ export default function HomePage() {
       ) : (
         <div className="space-y-6">
           <h2 className="text-3xl font-bold text-gray-900">
-            Posts ({posts.length})
+            Posts ({filteredPosts.length})
           </h2>
-          <div className="space-y-6">
-            {posts.map((post) => (
-              <PostItem
-                key={post.id}
-                post={post}
-                onEdit={handleEdit}
-                onDelete={deletePost}
-              />
-            ))}
-          </div>
+          {filteredPosts.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-gray-600 text-lg">
+                No se encontraron posts que coincidan con &quot;{searchTerm}
+                &quot;
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {filteredPosts.map((post) => (
+                <PostItem
+                  key={post.id}
+                  post={post}
+                  onEdit={handleEdit}
+                  onDelete={deletePost}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
