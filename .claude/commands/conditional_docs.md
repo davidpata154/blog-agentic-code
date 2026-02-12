@@ -93,3 +93,11 @@ This prompt helps you determine what documentation you should read based on the 
     - When adding visual feedback for input length constraints
     - When troubleshooting form validation or character counting
     - When adding similar character limit features to other form fields
+
+- app_docs/feature-0a566f9e-new-post-button-update.md
+  - Conditions:
+    - When working with the new post button on the homepage
+    - When implementing button text or styling changes
+    - When updating UI text internationalization (Spanish to English)
+    - When modifying button color schemes or visual appearance
+    - When troubleshooting homepage button functionality
