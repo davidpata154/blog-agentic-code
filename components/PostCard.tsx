@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { PostPreview } from '@/types/post'
-import { formatDate } from '@/lib/posts'
+import { formatDate, formatReadingTime } from '@/lib/posts'
 
 interface PostCardProps {
   post: PostPreview
@@ -38,10 +38,12 @@ export default function PostCard({ post }: PostCardProps) {
           {post.title}
         </h2>
 
-        {/* Fecha de publicación */}
-        <time className="text-sm text-gray-500" dateTime={post.date}>
-          {formatDate(post.date)}
-        </time>
+        {/* Fecha de publicación y tiempo de lectura */}
+        <div className="text-sm text-gray-500">
+          <time dateTime={post.date}>{formatDate(post.date)}</time>
+          <span aria-hidden="true"> • </span>
+          <span>⏱️ {formatReadingTime(post.readingTime)}</span>
+        </div>
 
         {/* Descripción del post */}
         <p className="text-gray-600 line-clamp-3">{post.description}</p>

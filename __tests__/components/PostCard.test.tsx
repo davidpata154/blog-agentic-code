@@ -34,6 +34,7 @@ describe('PostCard Component', () => {
     title: 'Test Post Title',
     description: 'This is a test post description for testing purposes.',
     date: '2024-01-15',
+    readingTime: 5,
   }
 
   it('should render post title', () => {
@@ -88,6 +89,7 @@ describe('PostCard Component', () => {
       title: 'Another Title',
       description: 'Another description',
       date: '2024-02-20',
+      readingTime: 3,
     }
 
     render(<PostCard post={differentPost} />)
