@@ -50,16 +50,16 @@ describe('usePostSearch Hook', () => {
     const { result } = renderHook(() => usePostSearch(mockPosts, 'React'))
 
     expect(result.current.length).toBe(2)
-    expect(result.current[0].id).toBe('1')
-    expect(result.current[1].id).toBe('2')
+    expect(result.current[0]?.id).toBe('1')
+    expect(result.current[1]?.id).toBe('2')
   })
 
   it('should filter posts by content correctly', () => {
     const { result } = renderHook(() => usePostSearch(mockPosts, 'framework'))
 
     expect(result.current.length).toBe(2)
-    expect(result.current[0].id).toBe('2')
-    expect(result.current[1].id).toBe('3')
+    expect(result.current[0]?.id).toBe('2')
+    expect(result.current[1]?.id).toBe('3')
   })
 
   it('should be case-insensitive', () => {
@@ -101,8 +101,8 @@ describe('usePostSearch Hook', () => {
 
     // Debería encontrar "Introducción" en el título y "producción" en el contenido del post 2
     expect(result.current.length).toBe(2)
-    expect(result.current[0].id).toBe('1')
-    expect(result.current[1].id).toBe('2')
+    expect(result.current[0]?.id).toBe('1')
+    expect(result.current[1]?.id).toBe('2')
   })
 
   it('should match posts by title or content', () => {
@@ -110,8 +110,8 @@ describe('usePostSearch Hook', () => {
 
     // Debería encontrar posts que contengan "JavaScript" en título o contenido
     expect(result.current.length).toBe(2)
-    expect(result.current[0].id).toBe('1')
-    expect(result.current[1].id).toBe('3')
+    expect(result.current[0]?.id).toBe('1')
+    expect(result.current[1]?.id).toBe('3')
   })
 
   it('should handle special characters in search term', () => {
@@ -135,7 +135,7 @@ describe('usePostSearch Hook', () => {
     )
 
     expect(result.current.length).toBe(1)
-    expect(result.current[0].id).toBe('1')
+    expect(result.current[0]?.id).toBe('1')
   })
 
   it('should update results when search term changes', () => {
@@ -152,7 +152,7 @@ describe('usePostSearch Hook', () => {
     rerender({ posts: mockPosts, term: 'Jest' })
 
     expect(result.current.length).toBe(1)
-    expect(result.current[0].id).toBe('3')
+    expect(result.current[0]?.id).toBe('3')
   })
 
   it('should update results when posts array changes', () => {

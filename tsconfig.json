@@ -31,6 +31,9 @@
       "@/types/*": ["types/*"]
     },
 
+    // Tipos adicionales para testing
+    "types": ["jest", "@testing-library/jest-dom"],
+
     "plugins": [
       {
         "name": "next"
