@@ -75,3 +75,12 @@ This prompt helps you determine what documentation you should read based on the 
     - When working with the SearchBar component or usePostSearch hook
     - When troubleshooting real-time filtering or search UI
     - When adding similar search features to other content types
+
+- app_docs/feature-d917007e-reading-time-estimate.md
+  - Conditions:
+    - When working with reading time estimation or calculation
+    - When implementing word count or content analysis features
+    - When modifying post metadata or type definitions (BlogPost, PostPreview)
+    - When working with the PostCard component or post display formatting
+    - When troubleshooting reading time display or formatting
+    - When adding similar time estimate features to other content types
